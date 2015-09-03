@@ -21,6 +21,9 @@ def main():
     for i,m in enumerate(re.findall(r'(\d+) +(\d+)', r.text)):
         easting, northing = map(int, m)
         print(bus, i, easting, northing)
+        # Some routes have more than one line, and we might need
+        # to model that. For example,
+        # http://maps.travelsouthyorkshire.com/RouteWkt/70_YTC_2_1.wkt
         scraperwiki.sqlite.save(unique_keys=['bus', 'point_index'],
           data=dict(bus=bus,
             point_index=i, easting=easting, northing=northing))
