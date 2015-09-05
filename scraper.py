@@ -14,27 +14,35 @@ import scraperwiki
 
 
 def main():
-    # We can't use just a number to identify the route:
-    # - routes come in 2 variants ("there" and "back");
-    # - same number, different routes
-    # - same number, similar route, different provider
-    # (for example, search for "70")
-    # So the identifier we use should probably be the stuff
-    # after the last '/'.
-    bus = "505"
-    r = requests.get('http://maps.travelsouthyorkshire.com/RouteWkt/505_LIN_1_2.wkt')
+    routes = """
+      505_LIN_1_2
+      98_MNL_1_1
+    """.split()
+
+    for route in routes:
+        scrape1(route)
+
+
+def scrape1(route):
+    url = "http://maps.travelsouthyorkshire.com/RouteWkt/{}.wkt".format(route)
+    r = requests.get(url)
 
     print(r.text)
 
-    for i,m in enumerate(re.findall(r'(\d+) +(\d+)', r.text)):
-        easting, northing = map(int, m)
-        print(bus, i, easting, northing)
-        # Some routes have more than one line, and we might need
-        # to model that. For example,
-        # http://maps.travelsouthyorkshire.com/RouteWkt/70_YTC_2_1.wkt
-        scraperwiki.sqlite.save(unique_keys=['bus', 'point_index'],
-          data=dict(bus=bus,
-            point_index=i, easting=easting, northing=northing))
+    # Some routes have more than one line, for example
+    # http://maps.travelsouthyorkshire.com/RouteWkt/70_YTC_2_1.wkt
+    for line_index, m in enumerate(re.findall(r'(\([^()]*\))', r.text)):
+        print(m)
+        line_text = m
+
+        for i,m in enumerate(re.findall(r'(\d+) +(\d+)', line_text)):
+            easting, northing = map(int, m)
+            print(route, line_index, i, easting, northing)
+            scraperwiki.sqlite.save(
+              unique_keys=['route', 'line_index', 'point_index'],
+              data=dict(route=route,
+                line_index=line_index, point_index=i,
+                easting=easting, northing=northing))
 
 
 if __name__ == '__main__':
