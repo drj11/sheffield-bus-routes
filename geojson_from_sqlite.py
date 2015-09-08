@@ -30,7 +30,7 @@ def main():
             geojson_lines.append(geojson_line)
 
     with open("routes.geojson", 'w') as w:
-        w.write("var routes = ")
+        # w.write("var routes = ")
         json.dump(geojson_lines, w, indent=2)
 
 
