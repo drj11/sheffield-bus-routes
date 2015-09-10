@@ -1,11 +1,8 @@
 {
   "features": [
     {
-      "type": "Feature",
-      "properties": {
-        "stroke": "#cc0000"
-      },
       "geometry": {
+        "type": "MultiLineString",
         "coordinates": [
           [
             [
@@ -429,16 +426,16 @@
               53.348181035895756
             ]
           ]
-        ],
-        "type": "MultiLineString"
-      }
+        ]
+      },
+      "properties": {
+        "stroke": "#83fc24"
+      },
+      "type": "Feature"
     },
     {
-      "type": "Feature",
-      "properties": {
-        "stroke": "#cc0000"
-      },
       "geometry": {
+        "type": "MultiLineString",
         "coordinates": [
           [
             [
@@ -5870,9 +5867,12 @@
               53.42718156642514
             ]
           ]
-        ],
-        "type": "MultiLineString"
-      }
+        ]
+      },
+      "properties": {
+        "stroke": "#488d8f"
+      },
+      "type": "Feature"
     }
   ],
   "type": "FeatureCollection"

@@ -1,10 +1,18 @@
 #!/usr/bin/env python3
 
+import hashlib
 import itertools
 import json
 import sqlite3
 
 import latlon
+
+def colour_from_route(s):
+    """
+    Return a hex colour "#555".
+    """
+
+    return "#" + hashlib.sha224(s).hexdigest()[:6]
 
 def main():
     connection = sqlite3.connect('scraperwiki.sqlite')
@@ -31,8 +39,9 @@ def main():
                 line_string.append([lon, lat])
             print(line_string)
             geojson_route.append(line_string)
+        colour = colour_from_route(route)
         feature = dict(type="Feature",
-          properties=dict(stroke="#cc0000"),
+          properties=dict(stroke=colour),
           geometry=dict(type="MultiLineString",
           coordinates=geojson_route))
         features.append(feature)
