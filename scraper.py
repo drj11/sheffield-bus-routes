@@ -16,6 +16,8 @@ import scraperwiki
 def main():
     routes = """
       505_LIN_1_2
+      70_MNL_5_1
+      97_MNL_1_1
       98_MNL_1_1
     """.split()
 
