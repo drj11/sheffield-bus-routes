@@ -2,7 +2,9 @@
   "features": [
     {
       "type": "Feature",
-      "properties": null,
+      "properties": {
+        "stroke": "#cc0000"
+      },
       "geometry": {
         "coordinates": [
           [
@@ -433,7 +435,9 @@
     },
     {
       "type": "Feature",
-      "properties": null,
+      "properties": {
+        "stroke": "#cc0000"
+      },
       "geometry": {
         "coordinates": [
           [

@@ -32,7 +32,7 @@ def main():
             print(line_string)
             geojson_route.append(line_string)
         feature = dict(type="Feature",
-          properties=None,
+          properties=dict(stroke="#cc0000"),
           geometry=dict(type="MultiLineString",
           coordinates=geojson_route))
         features.append(feature)
